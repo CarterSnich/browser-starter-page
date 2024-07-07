@@ -1,0 +1,13 @@
+name: Build extension
+on: [release]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt get update
+      - run: sudo apt upgrade
+      - run: sudo apt install nodejs
+      - run: npm install --global web-ext
+      - run: cd src
+      - run: zip ../ext.zip *
+      - run: web-ext build ext.zip
