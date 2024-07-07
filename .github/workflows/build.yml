@@ -1,13 +1,56 @@
-name: Build extension
-on: [release]
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'v1.0'
+        required: true
+      release_version:
+        description: '1.0'
+        required: true
+      release_description:
+        description: 'First release'
+        required: false
+
 jobs:
-  build:
+  create-release:
     runs-on: ubuntu-latest
+
     steps:
-      - run: sudo apt get update
-      - run: sudo apt upgrade
-      - run: sudo apt install nodejs
-      - run: npm install --global web-ext
-      - run: cd src
-      - run: zip ../ext.zip *
-      - run: web-ext build ext.zip
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        
+    - name: Build Project
+      run: |
+        npm install --global web-ext
+        zip ext.zip *
+        web-ext build ext.zip
+        
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.event.inputs.release_version }}
+        release_name: ${{ github.event.inputs.release_name }}
+        body: ${{ github.event.inputs.release_description }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: src/ext.xpi
+        asset_name: my-starter-page.xpi
+        asset_content_type: application/zip
