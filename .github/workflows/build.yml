@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       release_name:
-        description: 'v1.0'
+        description: 'Release name'
         required: true
       release_version:
-        description: '1.0'
+        description: 'Version'
         required: true
       release_description:
-        description: 'First release'
+        description: 'Add description'
         required: false
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ github.event.inputs.release_version }}
+        tag_name: ${{ github.event.inputs.release_version }}
         release_name: ${{ github.event.inputs.release_name }}
         body: ${{ github.event.inputs.release_description }}
         draft: false
