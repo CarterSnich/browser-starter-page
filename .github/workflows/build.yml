@@ -1,0 +1,58 @@
+name: Create Release
+
+on: 
+  push:
+    branches: 
+    - main
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install web-ext
+      run: npm install --global web-ext
+        
+    - name: Build Project
+      run: |
+        echo "build extension"
+        echo "piste! kay limited man documentation online. puta nya eroy!"
+        web-ext build -s src
+        ls -lh
+        echo "puta gud!"
+        ls -lh web-ext-artifacts
+        echo "yawa gad! puru folder pa man, nya inang, uusa man la sulod."
+        echo "d pa ma override file name. dynamic pa. hage!"
+
+    - name: Something wicked
+      run: echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.sha_short }}
+        release_name: ${{ env.sha_short }}
+        body: ${{ github.event.head_commit.message }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: web-ext-artifacts/my_starter_page-1.0.zip
+        asset_name: my-starter-page.zip
+        asset_content_type: application/zip
