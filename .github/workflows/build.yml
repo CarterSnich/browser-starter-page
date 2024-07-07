@@ -1,17 +1,6 @@
 name: Create Release
 
-on:
-  workflow_dispatch:
-    inputs:
-      release_name:
-        description: 'Release name'
-        required: true
-      release_version:
-        description: 'Version'
-        required: true
-      release_description:
-        description: 'Add description'
-        required: false
+on: [workflow_dispatch]
 
 jobs:
   create-release:
@@ -46,9 +35,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.event.inputs.release_version }}
-        release_name: ${{ github.event.inputs.release_name }}
-        body: ${{ github.event.inputs.release_description }}
+        tag_name: ${{ github.sha }}
+        release_name: ${{ github.sha }}
         draft: false
         prerelease: false
 
