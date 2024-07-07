@@ -28,9 +28,9 @@ jobs:
         
     - name: Build Project
       run: |
-        npm install --global web-ext
+        cd src
         zip ext.zip *
-        web-ext build ext.zip
+        npx web-ext build ext.zip
         
         
     - name: Create Release
