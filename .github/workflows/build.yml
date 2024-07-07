@@ -31,13 +31,9 @@ jobs:
         
     - name: Build Project
       run: |
-        echo "change directory to src"
-        cd src
-        echo "compress files"
-        zip ext.zip *
-        ls -lh
         echo "build extension"
-        web-ext build ext.zip
+        echo "piste! kay limited man documentation online. puta nya eroy!"
+        web-ext build -s src
         ls -lh
         
     - name: Create Release
