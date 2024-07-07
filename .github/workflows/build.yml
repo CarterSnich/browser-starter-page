@@ -30,6 +30,7 @@ jobs:
       run: |
         cd src
         zip ext.zip *
+        ls -lh
         npx web-ext build ext.zip
         
         
