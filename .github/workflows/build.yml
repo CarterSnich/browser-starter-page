@@ -31,11 +31,14 @@ jobs:
         
     - name: Build Project
       run: |
+        echo "change directory to src"
         cd src
+        echo "compress files"
         zip ext.zip *
         ls -lh
-        
-        
+        echo "build extension"
+        web-ext build ext.zip
+        ls -lh
         
     - name: Create Release
       id: create_release
