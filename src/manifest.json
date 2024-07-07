@@ -6,5 +6,11 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "content_security_policy": "script-src 'self'; script-src 'unsafe-inline'; object-src 'self';"
+  "content_security_policy": "script-src 'self'; script-src 'unsafe-inline'; object-src 'self';",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "blahblah@blah.bla"
+    }
+  },
+  "applications": { "gecko": { "id": "X@Y" } }
 }
