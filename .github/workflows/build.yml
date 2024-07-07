@@ -37,6 +37,8 @@ jobs:
         ls -lh
         echo "puta gud!"
         ls -lh web-ext-artifacts
+        echo "yawa gad! puru folder pa man, nya inang, uusa man la sulod."
+        echo "d pa ma override file name. dynamic pa. hage!"
         
     - name: Create Release
       id: create_release
@@ -56,6 +58,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: src/ext.xpi
-        asset_name: my-starter-page.xpi
+        asset_path: web-ext-artifacts/my_starter_page-1.0.zip
+        asset_name: my-starter-page.zip
         asset_content_type: application/zip
