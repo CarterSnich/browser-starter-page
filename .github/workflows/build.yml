@@ -43,6 +43,7 @@ jobs:
       with:
         tag_name: ${{ env.sha_short }}
         release_name: ${{ env.sha_short }}
+        body: ${{ github.event.head_commit.message }}
         draft: false
         prerelease: false
 
