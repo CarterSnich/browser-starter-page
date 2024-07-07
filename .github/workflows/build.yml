@@ -35,6 +35,8 @@ jobs:
         echo "piste! kay limited man documentation online. puta nya eroy!"
         web-ext build -s src
         ls -lh
+        echo "puta gud!"
+        ls -lh web-ext-artifacts
         
     - name: Create Release
       id: create_release
