@@ -25,13 +25,16 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
+
+    - name: Install web-ext
+      run: npm install --global web-ext
         
     - name: Build Project
       run: |
         cd src
         zip ext.zip *
         ls -lh
-        npx web-ext build ext.zip
+        
         
         
     - name: Create Release
