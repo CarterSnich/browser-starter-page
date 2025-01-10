@@ -1,7 +1,23 @@
+const searchEngines = {
+  google: "https://google.com/search?q=",
+  duckduckgo: "https://duckduckgo.com/?q=",
+  youtube: "https://www.youtube.com/results?search_query=",
+};
+
 const timeEl = document.getElementById("time");
 const amEl = document.getElementById("am");
 const pmEl = document.getElementById("pm");
 const dateEl = document.getElementById("date");
+const searchEngineEl = document.getElementById("search-engine");
+const searchBarForm = document.getElementById("search-bar");
+
+for (let se in searchEngines) {
+  const option = document.createElement("option");
+  option.value = searchEngines[se];
+  option.text = se;
+
+  searchEngineEl.appendChild(option);
+}
 
 setInterval(
   (function setDatetime() {
@@ -35,3 +51,12 @@ setInterval(
   })(),
   1000
 );
+
+searchBarForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const url = this["search-engine"].value;
+  const query = this["search-query"].value;
+
+  window.location.href = url + query;
+});
