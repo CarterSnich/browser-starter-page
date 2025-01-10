@@ -2,6 +2,12 @@ const searchEngines = {
   google: "https://google.com/search?q=",
   duckduckgo: "https://duckduckgo.com/?q=",
   youtube: "https://www.youtube.com/results?search_query=",
+  wikipedia: "https://en.wikipedia.org/wiki/",
+  reddit: "https://www.reddit.com/search/?q=",
+  aur: "https://aur.archlinux.org/packages?K=",
+  "debian pkg search": "https://packages.debian.org/search?keywords=",
+  "binge-browser": "https://binge-browser.vercel.app/?search_query=",
+  rule34: "https://rule34.xxx/index.php?page=post&s=list&tags=",
 };
 
 const timeEl = document.getElementById("time");
