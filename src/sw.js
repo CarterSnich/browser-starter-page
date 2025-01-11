@@ -86,6 +86,7 @@ self.addEventListener("install", (event) => {
       "./icons/ddg.png",
       "./icons/fb.png",
       "./icons/gdrive.png",
+      "https://cdn.jsdelivr.net/npm/nf-sauce-code-pro@2.1.3/nf-font.min.css",
     ])
   );
 });
