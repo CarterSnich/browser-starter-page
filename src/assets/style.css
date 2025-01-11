@@ -74,10 +74,12 @@ main {
   background-color: transparent;
 }
 
+#search-engine:hover,
 #search-go:hover {
   background-color: #7b7b9e;
 }
 
+#search-engine:active,
 #search-go:active {
   background-color: #595974;
 }
