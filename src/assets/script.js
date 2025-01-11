@@ -2,7 +2,7 @@ const searchEngines = {
   google: "https://google.com/search?q=",
   duckduckgo: "https://duckduckgo.com/?q=",
   youtube: "https://www.youtube.com/results?search_query=",
-  wikipedia: "https://en.wikipedia.org/wiki/",
+  wikipedia: "https://en.wikipedia.org/wiki/Special:Search?go=Go&search=",
   reddit: "https://www.reddit.com/search/?q=",
   aur: "https://aur.archlinux.org/packages?K=",
   "debian pkg search": "https://packages.debian.org/search?keywords=",
@@ -19,9 +19,8 @@ const searchBarForm = document.getElementById("search-bar");
 
 for (let se in searchEngines) {
   const option = document.createElement("option");
-  option.value = searchEngines[se];
   option.text = se;
-
+  option.value = searchEngines[se];
   searchEngineEl.appendChild(option);
 }
 
