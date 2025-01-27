@@ -17,10 +17,17 @@ const registerServiceWorker = async () => {
   }
 };
 
+const osaka = document.getElementById("osaka");
+const saataa_andagii = document.getElementById("saataa-andagii");
+
 const timeEl = document.getElementById("time");
 const amEl = document.getElementById("am");
 const pmEl = document.getElementById("pm");
 const dateEl = document.getElementById("date");
+
+osaka.addEventListener("click", function () {
+  saataa_andagii.play();
+});
 
 setInterval(
   (function setDatetime() {

@@ -68,6 +68,7 @@ self.addEventListener("install", (event) => {
       "./",
       "./index.html",
       "./assets/ayumu-kasuga.png",
+      "./assets/saataa-andagii-osaka.mp3",
       "./assets/style.css",
       "./assets/colors.css",
       "./assets/script.js",
