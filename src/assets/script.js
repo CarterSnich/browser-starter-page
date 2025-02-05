@@ -17,7 +17,7 @@ const registerServiceWorker = async () => {
   }
 };
 
-const osaka = document.getElementById("osaka");
+const osaka = document.querySelector("#osaka > img");
 const saataa_andagii = document.getElementById("saataa-andagii");
 
 const timeEl = document.getElementById("time");

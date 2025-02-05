@@ -95,6 +95,7 @@ main {
 
 #osaka > img {
   height: 180px;
+  cursor: pointer;
 }
 
 #separator {
