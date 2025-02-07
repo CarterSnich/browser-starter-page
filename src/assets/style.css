@@ -163,3 +163,48 @@ main {
     transform: scaleY(100%);
   }
 }
+
+#open-dialog-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: transparent;
+  color: var(--color3);
+  border: none;
+  cursor: pointer;
+}
+#open-dialog-button:hover {
+  color: var(--foreground);
+}
+
+#speed-dial-manager {
+  background-color: inherit;
+  color: inherit;
+
+  border-color: #737e83;
+}
+#dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+#dialog-content > span {
+  text-align: center;
+  color: inherit;
+}
+#dialog-content > textarea {
+  background-color: inherit;
+  color: inherit;
+  resize: none;
+}
+#dialog-content > div {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+::backdrop {
+  background-color: var(--background);
+  backdrop-filter: blur(24px);
+  opacity: 0.8;
+}

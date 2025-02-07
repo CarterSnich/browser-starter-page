@@ -4,6 +4,7 @@ const registerServiceWorker = async () => {
       const registration = await navigator.serviceWorker.register("sw.js", {
         scope: "./",
       });
+
       if (registration.installing) {
         console.log("Service worker installing");
       } else if (registration.waiting) {
@@ -17,6 +18,25 @@ const registerServiceWorker = async () => {
   }
 };
 
+function getSpeedDials() {
+  const stored = localStorage.getItem("speedDials");
+  const speedDials = JSON.parse(stored);
+
+  if (speedDials === null) {
+    return [
+      "https://google.com",
+      "https://youtube.com",
+      "https://web.facebook.com",
+    ];
+  }
+
+  return speedDials;
+}
+
+function setSpeedDials(s) {
+  localStorage.setItem("speedDials", JSON.stringify(s));
+}
+
 const osaka = document.querySelector("#osaka > img");
 const saataa_andagii = document.getElementById("saataa-andagii");
 
@@ -25,9 +45,30 @@ const amEl = document.getElementById("am");
 const pmEl = document.getElementById("pm");
 const dateEl = document.getElementById("date");
 
+const openDialogButton = document.getElementById("open-dialog-button");
+const closeDialogButton = document.getElementById("close-dialog-button");
+const speedDialManagerDialog = document.getElementById("speed-dial-manager");
+const speedDialTextArea = document.getElementById("speed-dial-links");
+const saveSpeedDials = document.getElementById("save-speed-dials");
+
 osaka.addEventListener("click", function () {
   saataa_andagii.play();
 });
+
+openDialogButton.addEventListener("click", function () {
+  speedDialManagerDialog.showModal();
+});
+closeDialogButton.addEventListener("click", function () {
+  speedDialManagerDialog.close();
+});
+saveSpeedDials.addEventListener("click", function () {
+  setSpeedDials(speedDialTextArea.value.split("\n"));
+  speedDialManagerDialog.close();
+});
+
+(function () {
+  speedDialTextArea.textContent = getSpeedDials().join("\n");
+})();
 
 setInterval(
   (function setDatetime() {

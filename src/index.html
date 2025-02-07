@@ -87,6 +87,26 @@
       </div>
     </main>
 
+    <button type="button" id="open-dialog-button">manage speed dials</button>
+
+    <dialog id="speed-dial-manager">
+      <div id="dialog-content">
+        <span>speed dials</span>
+        <textarea
+          id="speed-dial-links"
+          rows="12"
+          cols="40"
+          autocapitalize="none"
+          autocomplete="none"
+          autofocus
+        ></textarea>
+        <div>
+          <button type="button" id="save-speed-dials">save</button>
+          <button type="button" id="close-dialog-button">close</button>
+        </div>
+      </div>
+    </dialog>
+
     <script src="assets/script.js" defer></script>
   </body>
 </html>
