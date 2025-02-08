@@ -1,2 +1,4 @@
 # My Starter Page
-![1](1.png)
+
+![browser starter page](1.png)
+![speed dial manager](2.png)
