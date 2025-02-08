@@ -18,6 +18,22 @@ const registerServiceWorker = async () => {
   }
 };
 
+const osaka = document.querySelector("#osaka > img");
+const saataa_andagii = document.getElementById("saataa-andagii");
+
+const timeEl = document.getElementById("time");
+const amEl = document.getElementById("am");
+const pmEl = document.getElementById("pm");
+const dateEl = document.getElementById("date");
+
+const links = document.getElementById("links");
+
+const openDialogButton = document.getElementById("open-dialog-button");
+const closeDialogButton = document.getElementById("close-dialog-button");
+const speedDialManagerDialog = document.getElementById("speed-dial-manager");
+const speedDialTextArea = document.getElementById("speed-dial-links");
+const saveSpeedDials = document.getElementById("save-speed-dials");
+
 function getSpeedDials() {
   const stored = localStorage.getItem("speedDials");
   const speedDials = JSON.parse(stored);
@@ -33,23 +49,26 @@ function getSpeedDials() {
   return speedDials;
 }
 
-function setSpeedDials(s) {
-  localStorage.setItem("speedDials", JSON.stringify(s));
+function renderSpeedDials(speedDials) {
+  links.innerHTML = "";
+  speedDials.forEach((link) => {
+    const url = new URL(link);
+
+    const a = document.createElement("a");
+    const img = document.createElement("img");
+
+    a.href = url.toString();
+    img.src = `https://icon.horse/icon/${url.hostname}`;
+
+    a.appendChild(img);
+    links.appendChild(a);
+  });
 }
 
-const osaka = document.querySelector("#osaka > img");
-const saataa_andagii = document.getElementById("saataa-andagii");
-
-const timeEl = document.getElementById("time");
-const amEl = document.getElementById("am");
-const pmEl = document.getElementById("pm");
-const dateEl = document.getElementById("date");
-
-const openDialogButton = document.getElementById("open-dialog-button");
-const closeDialogButton = document.getElementById("close-dialog-button");
-const speedDialManagerDialog = document.getElementById("speed-dial-manager");
-const speedDialTextArea = document.getElementById("speed-dial-links");
-const saveSpeedDials = document.getElementById("save-speed-dials");
+function setSpeedDials(s) {
+  renderSpeedDials(s);
+  localStorage.setItem("speedDials", JSON.stringify(s));
+}
 
 osaka.addEventListener("click", function () {
   saataa_andagii.play();
@@ -62,12 +81,15 @@ closeDialogButton.addEventListener("click", function () {
   speedDialManagerDialog.close();
 });
 saveSpeedDials.addEventListener("click", function () {
-  setSpeedDials(speedDialTextArea.value.split("\n"));
+  const textAreaValue = speedDialTextArea.value.trim();
+  setSpeedDials(textAreaValue.split("\n"));
   speedDialManagerDialog.close();
 });
 
 (function () {
-  speedDialTextArea.textContent = getSpeedDials().join("\n");
+  const speedDials = getSpeedDials();
+  renderSpeedDials(speedDials);
+  speedDialTextArea.textContent = speedDials.join("\n");
 })();
 
 setInterval(
