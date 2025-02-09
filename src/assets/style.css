@@ -42,6 +42,7 @@ main {
 #left {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: end;
   padding-block: 1.75rem;
   gap: 1rem;
@@ -90,7 +91,6 @@ main {
 }
 
 #osaka {
-  flex-grow: 1;
 }
 
 #osaka > img {
