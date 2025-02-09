@@ -18,6 +18,12 @@ const registerServiceWorker = async () => {
   }
 };
 
+DEFAULT_SPEED_DIALS = [
+  "https://google.com",
+  "https://youtube.com",
+  "https://web.facebook.com",
+];
+
 const osaka = document.querySelector("#osaka > img");
 const saataa_andagii = document.getElementById("saataa-andagii");
 
@@ -35,18 +41,17 @@ const speedDialTextArea = document.getElementById("speed-dial-links");
 const saveSpeedDials = document.getElementById("save-speed-dials");
 
 function getSpeedDials() {
-  const stored = localStorage.getItem("speedDials");
-  const speedDials = JSON.parse(stored);
+  const stored = localStorage.getItem("speed-dials");
+  return stored || "";
+}
 
-  if (speedDials === null) {
-    return [
-      "https://google.com",
-      "https://youtube.com",
-      "https://web.facebook.com",
-    ];
+function parseSpeedDials(text) {
+  try {
+    const speedDials = text.split("\n").filter((link) => link);
+    return text ? speedDials : DEFAULT_SPEED_DIALS;
+  } catch (error) {
+    return DEFAULT_SPEED_DIALS;
   }
-
-  return speedDials;
 }
 
 function renderSpeedDials(speedDials) {
@@ -65,9 +70,10 @@ function renderSpeedDials(speedDials) {
   });
 }
 
-function setSpeedDials(s) {
-  renderSpeedDials(s);
-  localStorage.setItem("speedDials", JSON.stringify(s));
+function setSpeedDials(text) {
+  localStorage.setItem("speed-dials", text);
+  const speedDials = parseSpeedDials(text);
+  renderSpeedDials(speedDials);
 }
 
 osaka.addEventListener("click", function () {
@@ -75,21 +81,20 @@ osaka.addEventListener("click", function () {
 });
 
 openDialogButton.addEventListener("click", function () {
+  const stored = localStorage.getItem("speed-dials");
+  speedDialTextArea.textContent = stored;
   speedDialManagerDialog.showModal();
 });
 closeDialogButton.addEventListener("click", function () {
   speedDialManagerDialog.close();
 });
 saveSpeedDials.addEventListener("click", function () {
-  const textAreaValue = speedDialTextArea.value.trim();
-  setSpeedDials(textAreaValue.split("\n"));
+  setSpeedDials(speedDialTextArea.value);
   speedDialManagerDialog.close();
 });
 
 (function () {
-  const speedDials = getSpeedDials();
-  renderSpeedDials(speedDials);
-  speedDialTextArea.textContent = speedDials.join("\n");
+  renderSpeedDials(parseSpeedDials(getSpeedDials()));
 })();
 
 setInterval(
