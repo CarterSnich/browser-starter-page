@@ -82,7 +82,7 @@ osaka.addEventListener("click", function () {
 
 openDialogButton.addEventListener("click", function () {
   const stored = localStorage.getItem("speed-dials");
-  speedDialTextArea.textContent = stored;
+  speedDialTextArea.value = stored;
   speedDialManagerDialog.showModal();
 });
 closeDialogButton.addEventListener("click", function () {
